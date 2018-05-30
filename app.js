@@ -1,42 +1,19 @@
-const http = new easyHTTP;
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
 
-// Get posts from jasonplaceholder website API
-http.get('https://jsonplaceholder.typicode.com/posts', function(posts) {
-  if(posts) {
-  console.log(posts);
-  }
-});
+button1.addEventListener('click', getText);
 
-// Get single post from jasonplaceholder website API
-http.get('https://jsonplaceholder.typicode.com/posts/1', function(post) {
-  if(post) {
-  console.log(post);
-  }
-});
-
-// Create Data
-const data = {
-  title: 'Test post',
-  body: 'This is a new test post'
-};
-
-// Create Post
-http.post('https://jsonplaceholder.typicode.com/posts', data, function(post) {
-  if(post) {
-    console.log(post);
-    }
-});
-
-// Update Post
-http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(post) {
-  if(post) {
-    console.log(post);
-    }
-});
-
-// Delete post
-http.delete('https://jsonplaceholder.typicode.com/posts/1', function(response) {
-  if(response) {
-  console.log(response);
-  }
-});
+function getText() {
+  fetch('test.txt')
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+    
+}
