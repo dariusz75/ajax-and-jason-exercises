@@ -31,7 +31,6 @@ http.post('https://jsonplaceholder.typicode.com/posts', data, function(post) {
 http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(post) {
   if(post) {
     console.log(post);
-    document.getElementById('output').innerHTML = post;
     }
 });
 
