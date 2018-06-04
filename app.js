@@ -31,6 +31,7 @@ http.post('https://jsonplaceholder.typicode.com/posts', data, function(post) {
 http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(post) {
   if(post) {
     console.log(post);
+    document.getElementById('output').innerHTML = post;
     }
 });
 
@@ -38,5 +39,6 @@ http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(post) {
 http.delete('https://jsonplaceholder.typicode.com/posts/1', function(response) {
   if(response) {
   console.log(response);
+  document.getElementById('output').innerHTML = response;
   }
 });
