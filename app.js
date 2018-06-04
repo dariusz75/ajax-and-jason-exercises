@@ -1,18 +1,24 @@
 const http = new easyHTTP;
 
-// Get posts from jasonplaceholder website API
-http.get('https://jsonplaceholder.typicode.com/posts', function(posts) {
-  if(posts) {
-  console.log(posts);
-  }
-});
+var getButton = document.getElementById('get');
+var postButton = document.getElementById('post');
+var putButton = document.getElementById('put');
+var deleteButton = document.getElementById('delete');
 
-// Get single post from jasonplaceholder website API
-http.get('https://jsonplaceholder.typicode.com/posts/1', function(post) {
-  if(post) {
-  console.log(post);
-  }
-});
+getButton.addEventListener('click', getPost);
+postButton.addEventListener('click', createPost);
+putButton.addEventListener('click', updatePost);
+deleteButton.addEventListener('click', deletePost);
+
+
+// Get post from jasonplaceholder website API
+function getPost() {
+  http.get('https://jsonplaceholder.typicode.com/posts/1', function(response) {
+    console.clear();
+    console.log(response);
+  });
+}
+
 
 // Create Data
 const data = {
@@ -21,24 +27,25 @@ const data = {
 };
 
 // Create Post
-http.post('https://jsonplaceholder.typicode.com/posts', data, function(post) {
-  if(post) {
-    console.log(post);
-    }
-});
+function createPost() {
+  http.post('https://jsonplaceholder.typicode.com/posts/', data, function(response) {
+    console.clear();
+    console.log(response);
+  });
+}
 
 // Update Post
-http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(post) {
-  if(post) {
-    console.log(post);
-    document.getElementById('output').innerHTML = post;
-    }
-});
+function updatePost() {
+  http.put('https://jsonplaceholder.typicode.com/posts/1', data, function(response) {
+    console.clear();
+    console.log(response);
+  });
+}
 
 // Delete post
-http.delete('https://jsonplaceholder.typicode.com/posts/1', function(response) {
-  if(response) {
-  console.log(response);
-  document.getElementById('output').innerHTML = response;
-  }
-});
+function deletePost() {
+  http.delete('https://jsonplaceholder.typicode.com/posts/1', data, function(response) {
+    console.clear();
+    console.log(response);
+  });
+}
