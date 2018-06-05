@@ -1,66 +1,53 @@
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
-const button3 = document.getElementById('button3');
 let output = document.getElementById('output');
 
-button1.addEventListener('click', getText);
-button2.addEventListener('click', getJson);
-button3.addEventListener('click', getExternal);
+button1.addEventListener('click', getUserNames);
+button2.addEventListener('click', getUserDetails);
 
-// Get data from local text file
-function getText() {
-  fetch('test.txt')
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(data) {
-      output.innerHTML = data;
-      console.log(data);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+const http = new EasyHTTP;
+
+function insertUserNames(users) {
+  let listedUsers = '';
+  users.forEach(user => {
+    listedUsers += `<li>${user.name}</li>`
+      console.log(user.name);
+  })
+  output.innerHTML = listedUsers;
 }
 
 
-// Get data from local json file
-function getJson() {
-  fetch('posts.json')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      let outputedData = '';
-
-      data.forEach(post => {
-        outputedData += `
-          <p>Title: ${post.title} <br>Body: ${post.body} </p>
-        `
-      });
-      output.innerHTML = outputedData;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });  
+function insertUserDetails(users) {
+  let listedUsers = '';
+  users.forEach(user => {
+    listedUsers += `
+    <ul>
+      <li>ID: ${user.id}</li>
+      <li>Name: ${user.name}</li>
+      <li>Username: ${user.username}</li>
+    </ul>`
+      console.log(user.name);
+  })
+  output.innerHTML = listedUsers;
 }
 
-// Get data from external json file
-function getExternal() {
-  fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      let outputedData = '';
 
-      data.forEach(post => {
-        outputedData += `
-          <p>Title: ${post.title} <br>Body: ${post.body} </p>
-        `
-      });
-      output.innerHTML = outputedData;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });  
+function getUserNames() {
+  // Get Users
+  http.get('https://jsonplaceholder.typicode.com/users')
+  .then(function(data) {
+    insertUserNames(data);
+  })
+  .catch(error => console.log(error));
 }
+
+
+function getUserDetails() {
+  // Get Users
+  http.get('https://jsonplaceholder.typicode.com/users')
+  .then(function(data) {
+    insertUserDetails(data);
+  })
+  .catch(error => console.log(error));
+}
+
